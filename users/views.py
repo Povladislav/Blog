@@ -1,22 +1,18 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm,UserUpdateForm,ProfileUpdateForm
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
 
-def register(request):
-    if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            
-            username = form.cleaned_data['username']
-            messages.success(request,f'Your account has been created! You are now able to log in')
-            return  redirect('login')
-    else:
-        form = UserRegisterForm()
-    return render(request,'users/register.html',{'form':form})
 
+class AuthorRegister(SuccessMessageMixin,CreateView):
+    form_class = UserRegisterForm
+    template_name = 'users/register.html'
+    success_url = reverse_lazy('login')
+    success_message = f'Your account has been created! You are now able to log in'
 @login_required
 def profile(request):
     if request.method == 'POST':
