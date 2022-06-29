@@ -56,7 +56,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'django_project.urls'
-#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
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

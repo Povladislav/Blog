@@ -9,6 +9,7 @@ from django.views.generic import (
     DeleteView
 )
 from .models import Post
+
 class PostListView(ListView):
     paginate_by = 5
     model = Post
