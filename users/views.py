@@ -16,6 +16,7 @@ class AuthorRegister(SuccessMessageMixin,CreateView):
 @login_required
 def profile(request):
     if request.method == 'POST':
+
         u_form = UserUpdateForm(request.POST,instance=request.user)
         p_form = ProfileUpdateForm(request.POST,
                                    request.FILES,
@@ -28,6 +29,7 @@ def profile(request):
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
+
     context = {
         'u_form': u_form,
         'p_form': p_form
